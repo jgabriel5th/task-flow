@@ -10,3 +10,5 @@ Route::get('/', function () {
 Route::get('', [TaskController::class, 'index']);
 
 Route::post('/tarefas/salvar', [TaskController::class, 'store']);
+
+Route::delete('/tarefas/deletar/{id}', [TaskController::class, 'destroy']);

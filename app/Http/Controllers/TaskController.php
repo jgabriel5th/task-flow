@@ -26,6 +26,15 @@ class TaskController extends Controller
 
         $novaTarefa->save();
 
-        return redirect('/tarefas');
+        return redirect('/');
+    }
+
+    public function destroy($id)
+    {
+        $tarefa = Task::findOrFail($id);
+
+        $tarefa->delete();
+
+        return redirect('/');
     }
 }
