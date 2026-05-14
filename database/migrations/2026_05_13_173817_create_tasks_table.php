@@ -14,7 +14,8 @@ return new class extends Migration
             $table->text('descricao');
             $table->string('responsavel');
             $table->date('prazo');
-            $table->enum('status', ['pendente', 'concluida'])->default('pendente');
+            // No arquivo da Migration
+            $table->string('status')->default('pendente');
             $table->timestamps();
         });
     }
