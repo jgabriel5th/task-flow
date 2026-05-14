@@ -33,13 +33,31 @@
 
     @if(count($tarefas) > 0)
         @foreach($tarefas as $tarefa)
-            <div class="card">
-                <h3>{{ $tarefa->titulo }}</h3>
-                <p>{{ $tarefa->descricao }}</p>
-                <p><strong>Responsável:</strong> {{ $tarefa->responsavel }}</p>
-                <p class="status">Status: {{ $tarefa->status }}</p>
-            </div>
-        @endforeach
+    <div class="card">
+        <h3>{{ $tarefa->titulo }}</h3>
+
+        <p>{{ $tarefa->descricao }}</p>
+
+        <p>
+            <strong>Responsável:</strong>
+            {{ $tarefa->responsavel }}
+        </p>
+
+        <p class="status">
+            Status: {{ $tarefa->status }}
+        </p>
+
+        <form action="/tarefas/deletar/{{ $tarefa->id }}" method="POST">
+            @csrf
+            @method('DELETE')
+
+            <button type="submit">
+                Excluir
+            </button>
+        </form>
+
+    </div>
+@endforeach
     @else
         <p>Nenhuma tarefa encontrada. Que tal criar a primeira?</p>
     @endif
