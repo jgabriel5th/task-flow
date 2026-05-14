@@ -35,12 +35,20 @@ class TaskController extends Controller
         $tarefa = Task::findOrFail($id);
 
         // 2. Muda o status para concluída
-        $tarefa->status = 'concluida';
+        $tarefa->status = 'concluido';
 
         // 3. Salva a alteração no banco
         $tarefa->save();
 
         // 4. Volta para a página de tarefas
         return redirect('');
+    }
+    public function destroy($id)
+    {
+        $tarefa = Task::findOrFail($id);
+
+        $tarefa->delete();
+
+        return redirect('/');
     }
 }

@@ -11,3 +11,5 @@ Route::post('/tarefas/salvar', [TaskController::class, 'store']);
 
 // 3. Rota para concluir a tarefa
 Route::patch('/tarefas/{id}/concluir', [TaskController::class, 'concluir'])->name('tarefas.concluir');
+
+Route::delete('/tarefas/deletar/{id}', [TaskController::class, 'destroy']);

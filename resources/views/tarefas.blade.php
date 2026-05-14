@@ -44,29 +44,38 @@
                 <p>{{ $tarefa->descricao }}</p>
                 <p><strong>Responsável:</strong> {{ $tarefa->responsavel }}</p>
 
-                {{-- O STATUS SÓ APARECE SE A TAREFA FOR PENDENTE --}}
+                {{-- STATUS SÓ APARECE SE A TAREFA FOR PENDENTE --}}
                 @if($tarefa->status == 'pendente')
                     <p class="status pendente">
                         Status: {{ $tarefa->status }}
                     </p>
                 @endif
 
-                {{-- LÓGICA DO BOTÃO OU MENSAGEM DE SUCESSO --}}
-                <div style="margin-top: 10px;">
+                <div style="margin-top: 10px; display: flex; gap: 10px; align-items: center;">
+                    {{-- LÓGICA DO BOTÃO CONCLUIR OU MENSAGEM DE SUCESSO --}}
                     @if($tarefa->status == 'pendente')
                         <form action="{{ route('tarefas.concluir', $tarefa->id) }}" method="POST" style="display:inline;">
                             @csrf
                             @method('PATCH')
                             <button type="submit" class="btn-concluir">
-                                ✓ Concluir Tarefa
+                                ✓ Concluir
                             </button>
                         </form>
                     @else
-                        <span style="color: #27ae60; font-weight: bold; font-size: 1.1em;">✔ Concluída com sucesso!</span>
+                        <span style="color: #27ae60; font-weight: bold;">✔ Concluída com sucesso!</span>
                     @endif
+
+                    {{-- BOTÃO EXCLUIR (Sempre visível) --}}
+                    <form action="/tarefas/deletar/{{ $tarefa->id }}" method="POST" style="display:inline;">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" style="background: none; border: none; color: #e74c3c; cursor: pointer; text-decoration: underline; font-size: 0.9em;">
+                            Excluir
+                        </button>
+                    </form>
                 </div>
             </div>
-        @endforeach
+        @endforeach {{-- Fechamos o loop aqui, uma única vez --}}
     @else
         <p>Nenhuma tarefa encontrada. Que tal criar a primeira?</p>
     @endif
